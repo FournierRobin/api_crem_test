@@ -54,9 +54,10 @@ def get_flight_from_date(url:str,session:requests.Session, start_date:str, end_d
     else:
         print(f"Request failed with status code: {response.status_code}")
 
-    #terrain_list = get_terrain_list(os.getenv('TERRAIN_LIST_PATH'))
+    terrain_list = get_terrain_list(os.getenv('TERRAIN_LIST_PATH'))
     #filtered_data = [flight for flight in data if flight['adep'] in terrain_list or flight['ades'] in terrain_list]
-    return data
+    filtered_data = [flight for flight in data if flight['ades'] in terrain_list]
+    return filtered_data
 
 def get_message_from_date(url:str,session:requests.Session, start_date:str, end_date:str) -> str:
     url = f'{url}/message'
